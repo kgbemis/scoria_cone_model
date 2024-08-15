@@ -117,7 +117,11 @@ for i=1
         dLset(5)=L(i,j)-L(i,j-1);
         end
         dLdHset=dLset./dHset;
-        dLdH=max(dLdHset,[],'omitnan');
+	% changing from 
+	%dLdH=max(dLdHset,[],"omitnan");
+	% to
+	dLdH=max(dLdHset(~isnan(dLdHset)));
+	%
         dirset=find(dLdHset==dLdH);
         k=length(dirset);
         kcon=max(diff(dirset));
@@ -163,7 +167,11 @@ for i=n
             dLset(6)=L(i,j)-L(i-1,j-1);            
         end
         dLdHset=dLset./dHset;
-        dLdH=max(dLdHset,[],'omitnan');
+        % changing from
+	% dLdH=max(dLdHset,[],"omitnan");
+	% to 
+	dLdH=max(dLdHset(~isnan(dLdHset)));
+	%
         dirset=find(dLdHset==dLdH);
         k=length(dirset);
         kcon=max(diff(dirset));
